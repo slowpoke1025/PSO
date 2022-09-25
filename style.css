@@ -1,0 +1,35 @@
+:root {
+    --node-width: 30px;
+    --food-width: 15px;
+}
+
+.node {
+    width: var(--node-width);
+    height: var(--node-width);
+    aspect-ratio: 1/1;
+    border-radius: 50%;
+    position: absolute;
+    left: 100px;
+    top: 100px;
+    translate: -50% -50%;
+
+    transition: left 0.3s, top 0.3s;
+    /* transition: all 1.5s;
+    transition-timing-function: cubic-bezier(0.075, 0.8, 0.165, 1); */
+}
+
+body {
+    position: relative;
+
+    height: 100%;
+    overflow: hidden;
+}
+
+.food {
+    width: var(--food-width);
+    aspect-ratio: 1/1;
+    background-color: rgb(0, 0, 0);
+    position: absolute;
+    translate: -50% -50%;
+    z-index: -1;
+}
