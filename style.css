@@ -11,7 +11,7 @@
     position: absolute;
     left: 100px;
     top: 100px;
-    translate: -50% -50%;
+    transform: translate(-50%, -50%);
 
     transition: left 0.3s, top 0.3s;
     /* transition: all 1.5s;
