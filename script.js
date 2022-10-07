@@ -2,6 +2,7 @@ const WEIGHT = 3
 const C1 = 1
 const C2 = 2
 const VMAX = 20;
+const NODE_NUM = 30;
 let WIDTH = document.documentElement.scrollWidth
 let HEIGHT = document.documentElement.scrollHeight
 let NODE_WIDTH = getComputedStyle(document.documentElement).getPropertyValue("--node-width").replace("px", "")
@@ -29,7 +30,7 @@ class Node {
         this.bestX = this.x;
         this.bestY = this.y;
         this.vX = random(1, 10) * (random(0, 1) ? -1 : 1);
-        this.vY = random(1, 10);
+        this.vY = random(1, 10) * (random(0, 1) ? -1 : 1);
         this.color = randomRGB();
         document.body.append(this.node)
         ++this.constructor.nodeNum
@@ -85,14 +86,28 @@ window.addEventListener("resize", e => {
     HEIGHT = document.documentElement.scrollHeight
 })
 
-// window.addEventListener("mousemove", e => {
-//     TARGET.x = e.pageX;
-//     TARGET.y = e.pageY;
-// })
-
-document.addEventListener("keydown", e => {
-    ok = true
+window.addEventListener("mousemove", e => {
+    TARGET.x = e.pageX;
+    TARGET.y = e.pageY;
 })
+
+window.addEventListener("click", e => {
+    Nodes.forEach(n => {
+        n.x = random(-(WIDTH - NODE_WIDTH / 2) * 0.5, (WIDTH - NODE_WIDTH / 2) * 1.5);
+        n.y = random(-(HEIGHT - NODE_WIDTH / 2) * 0.5, (HEIGHT - NODE_WIDTH / 2) * 1.5);
+        n.vX = random(-10, 10)
+        n.vY = random(-10, 10)
+        n.bestX = n.x
+        n.bestY = n.y
+    })
+    Node.bestX = Number.MAX_SAFE_INTEGER;
+    Node.bestY = Number.MAX_SAFE_INTEGER;
+
+})
+
+// document.addEventListener("keydown", e => {
+//     ok = true
+// })
 
 function distance(d1, d2) {
     return Math.abs(d1 - d2)
@@ -113,14 +128,14 @@ function move() {
     for (const node of Nodes) {
         node.update()
 
-        if (ok && collision(node, TARGET)) {
-            setTimeout(() => {
-                food.remove()
-                generateFood()
-                ok = true
-            }, 1500)
-            ok = false;
-        }
+        // if (ok && collision(node, TARGET)) {
+        //     setTimeout(() => {
+        //         food.remove()
+        //         generateFood()
+        //         ok = true
+        //     }, 1500)
+        //     ok = false;
+        // }
     }
     updateGlobal()
 
@@ -131,12 +146,12 @@ function move() {
 }
 
 let food;
-Nodes = []
+const Nodes = []
 
-for (let i = 0; i < 50; ++i) {
+for (let i = 0; i < NODE_NUM; ++i) {
     Nodes.push(new Node())
 }
-generateFood()
+// generateFood()
 updateGlobal()
 move()
 
