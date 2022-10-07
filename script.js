@@ -79,17 +79,25 @@ class Node {
 }
 
 
-
+if (("ontouchstart" in document.documentElement)) {
+    window.addEventListener("touchmove", e => {
+        TARGET.x = e.changedTouches[0].pageX;
+        TARGET.y = e.changedTouches[0].pageY;
+        console.log("n")
+    })
+} else {
+    window.addEventListener("mousemove", e => {
+        TARGET.x = e.pageX;
+        TARGET.y = e.pageY;
+    })
+}
 
 window.addEventListener("resize", e => {
     WIDTH = document.documentElement.scrollWidth
     HEIGHT = document.documentElement.scrollHeight
 })
 
-window.addEventListener("mousemove", e => {
-    TARGET.x = e.pageX;
-    TARGET.y = e.pageY;
-})
+
 
 window.addEventListener("click", e => {
     Nodes.forEach(n => {

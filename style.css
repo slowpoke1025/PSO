@@ -25,6 +25,13 @@ body {
     overflow: hidden;
 }
 
+html {
+    overflow: hidden;
+    width: 100vw;
+    height: 100vh;
+    /* for mobile */
+}
+
 .food {
     width: var(--food-width);
     aspect-ratio: 1/1;
